@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+	<link rel="stylesheet" type="text/css" href="/static/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/style1.css">
+</head>
+<body>
+	<div class="topnav">
+        <div class="lo">
+            <img src="/static/images/logo.png" alt="Logo" class="im">
+            <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+        </div>
+          <div class="overlay"></div>
+          <button class="burger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-close"></i>
+          </button>
+          <aside>
+            <a class="active">Seat Arrangenment</a>
+            <a href="/alloc">Allocate Students</a>
+            <a href="/dash">Dashboard</a>
+            <a href="/attend">Atttendence</a>
+
+            <a href="/">Logout</a>
+            <button>#</button>
+          </aside>
+    </div>
+<br><br><br><br>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="post" action="{{ url_for('insert') }}">
+                <h1 class="H1">SEAT ARRANGEMENT</h1>
+                <span>enter details</span>
+                <input type="text" placeholder="Hall no(SA Number)" id="sa_no" name="sa_no"> 
+                <input type="Number" placeholder="Room Number" id="class_no" name="class_no">
+                <input type="Number" placeholder="Rows" id="rows" name="rows">
+                <input type="Number" placeholder="columns" id="columns" name="columns">
+                <button type="submit">Genarate</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form method="post" action="{{ url_for('admin') }}">
+                <h1 class="H1">EXAM HALL</h1>
+                <p class="p1">Generate exam hall by entering the department and year</p>
+  
+            
+                <span>enter department and year</span>
+                <input type="text" placeholder="Department" id="department" name="department">
+                <input type="Number" placeholder="Year" id="year" name="year">
+                <button type="submit">Genarate</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Back to rooms!</h1>
+                    <p>Genarate list of rooms for arrange seats</p>
+                    <button class="hidden" id="login">Arrange</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Let's Arrange the seat...!</h1>
+                    <p>Arrange seat for each rooms for allocating students</p>
+                    <button class="hidden" id="register">Arrange</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <script src="/static/script.js"></script>
+  
+  <div class="rooms-list">
+      {% if room_numbers %}
+          <h2>Room Numbers:</h2>
+          <ul>
+              {% for room_no in room_numbers %}
+                  <li>{{ room_no[0] }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+  </div>
+    <script type="text/javascript">
+        const toggleMenu = () => document.body.classList.toggle("open");
+    </script>
+</body>
+</html>

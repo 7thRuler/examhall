@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DASHBOARD</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+	<link rel="stylesheet" type="text/css" href="/static/home.css">
+</head>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #bea5fa;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #200530;
+}
+
+tr{
+  background-color: #2e2347;
+}
+tr:nth-child(even) {
+  background-color: #2e2347;
+}
+.gradient-button {
+  display: inline-block;
+  left-margin:100px;
+  padding: 10px 20px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  background: linear-gradient(to right, #8c3acf, #1a0229);
+  border-radius: 5px;
+  border: 1px solid #2980b9;
+  transition: background 0.3s ease;
+}
+
+.gradient-button:hover {
+  background: linear-gradient(to right, #b692fc, #3934db);
+}
+.sh{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+<body>
+	<div class="topnav">
+        <div class="lo">
+            <img src="/static/images/logo.png" alt="Logo" class="im">
+            <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+        </div>
+          <div class="overlay"></div>
+          <button class="burger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-close"></i>
+          </button>
+          <aside>
+            <a href="/admin">Seat Arrangenment</a>
+            <a href="/alloc">Allocate Students</a>
+            <a class="active">Dashboard</a>
+            <a href="/attend">Atttendence</a>
+            <a href="/">Logout</a>
+            <button>#</button>
+          </aside>
+    </div>
+    <br><br>
+    <div class="table">
+      <div>
+        <h2>No Of Room Generate</h2>
+      
+      <table id="example" class="display" cellspacing="0" width="100%" border="1">
+          <thead>
+            <tr >
+              <th style="text-align: center;">HALL</th>
+              <th style="text-align: center;">Room No</th>
+              <th style="text-align: center;">Coloum</th>
+              <th style="text-align: center;">Row</th>
+              <th style="text-align: center;">Total Seat</th>
+              <th style="text-align: center;">Delete</th>
+              <!--<th style="text-align: center;">Edit</th>-->
+            </tr>
+          </thead>
+            {% for row in data %}
+              <tr>
+              {% for d in row %}
+                  <td style="text-align: center;" >{{d}}</td>
+                  <!--<td style="text-align: center;"><a href="/edit/{{row[0]}}">EDIT</a></td>-->
+                  {% endfor %}
+                  <td style="text-align: center;"><a href="/delete/{{row[0]}}">DELETE</a></td>        
+              </tr>
+            {% endfor %}
+      </table>
+      <br><br>
+      <form method="post" action="" class="sh">
+        <button class="gradient-button" type="submit">Shuffle</button>
+      </form>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        const toggleMenu = () => document.body.classList.toggle("open");
+    </script>
+</body>
+</html>

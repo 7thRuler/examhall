@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+  }
+
+
+  
+/* -------------------------------------TEXT ON IMAGE------------------------------------------ */
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    font-size: 17px;
+  }
+  
+  .container {
+    position: relative;
+    max-width: 900px;
+    margin-bottom: 50px;
+  }
+  
+  .container img {vertical-align: middle;}
+  
+  .container .content {
+    position: absolute;
+    bottom:200px; 
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 10px;
+  }
+  /* Add a black background color to the top navigation */
+  .topnav {
+    background-color: #1f1d58;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddddddef;
+    color: black;
+  }
+  .topnav a button:hover {
+    background-color:none;
+    color: rgb(255, 255, 255);
+  }
+  .topnav a.active {
+    background-color: #dddddd00;
+    color: rgb(255, 255, 255);
+  }
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  .column {
+    float: left;
+    width: 20%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .container {
+    padding: 14px 16px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #b62d2d;
+  }
+  
+  /* table css */
+  .dataframe{
+      width: 674px; 
+      height: 344px; 
+      background-color: gray;
+      border-color: white;
+      margin-left: auto; 
+      margin-right: auto; 
+      border:2px;
+      padding-left:8px;
+  }
+  table
+  {
+      width: 100%;
+      border-collapse: separate;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even){background-color: #f2f2f2}
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+/* Define the styles for the image container */
+.image-container {
+    width: 300px;
+    height: 200px;
+    position: relative;
+}
+
+/* Define the styles for the images */
+.image-container img {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#imageDiv {
+    border: 1px solid #ccc;
+    background: #eee;
+}
+.lo {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  margin: auto;
+  z-index: 1;
+}
+  .im {
+    width: 50px; /* Set the width of the logo image */
+    height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .scms {
+    color: #ffffff;
+  }
+  .exam {
+    font-family:"Lucida Handwriting";
+    color: #f9e7e7;
+  }

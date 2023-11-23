@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LOGIN</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/static/home.css">
+<link rel="stylesheet" href="/static/styles.css" />
+<style>
+  body {
+  margin: 0;
+  background-image: url("/static/images/background.svg");
+  background-repeat: repeat;
+  background-size: cover;
+  font-family: "Euclid Circular A";
+  color: #000;
+  animation:  rotate 1s infinite alternate linear;
+  animation:backgroundAnimation 6s infinite alternate linear;
+  }
+  @keyframes rotate {
+    100% {
+      background-position: 15% 50%;
+    }
+  }
+
+  @keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+  
+  /* -------------------------------------NAVIGATION BARS------------------------------------------------*/
+  
+  
+  
+  body,html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  /* -----------------------------------------------login------------------------------------------------*/
+  
+
+  
+  /* Add styles to the form container */
+  
+  .container {
+   
+    margin: 150px auto;
+    max-width: 400px;
+    padding: 14px 16px;
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: all 0.375s;
+  }
+
+  
+  /* Full-width input fields */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit button */
+  .btn {
+    background-color: #1f1d58;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .btn:hover {
+    opacity: 1;
+  }
+  </style>
+</style>
+</head>
+<body>
+  <body>
+    <div class="topnav">
+        <div class="lo">
+            <img src="/static/images/logo.png" alt="Logo" class="im">
+            <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+        </div>
+          <div class="overlay"></div>
+          <button class="burger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-close"></i>
+          </button>
+          <aside>
+            <a href="/">Home</a>
+            <a class="active" href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/About">About</a>
+            <button>#</button>
+          </aside>
+    </div>
+
+<div class="bg-img">
+
+  <form action="" class="container" method="POST">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1"> Remember me</label>
+  <br><br>
+    {% if error%}
+    <pre> {{error}}</pre>
+  {% endif %}
+
+    <input type="submit" class="btn" value="LOGIN">
+  </form>
+</div>
+
+<script type="text/javascript">
+    const toggleMenu = () => document.body.classList.toggle("open");
+  </script>
+</body>
+</html>

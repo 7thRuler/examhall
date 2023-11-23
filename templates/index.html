@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOME</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+	<link rel="stylesheet" type="text/css" href="/static/home.css">
+</head>
+<body>
+	<div class="topnav">
+        <div class="lo">
+            <img src="/static/images/logo.png" alt="Logo" class="im">
+            <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+        </div>
+          <div class="overlay"></div>
+          <button class="burger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-close"></i>
+          </button>
+          <aside>
+            <a class="active" href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/About">About</a>
+            <button>#</button>
+          </aside>
+    </div>
+<div class="slideshow-container">
+
+    <div id="imageDiv" onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+        <img id="image" src="/static/images/img1.jpg" style="width:100%" alt="Default Image">
+    </div>
+    <script>
+        function changeImage(isHovered) {
+            var image = document.getElementById("image");
+            if (isHovered) {
+                image.src = "/static/images/img2.jpg";
+                image.alt = "img2";
+            } else {
+                image.src = "/static/images/img1.jpg";
+                image.alt = "img1";
+            }
+        }
+    </script>
+</div>
+
+    <div class="container">  
+    <div class="content">
+        <h1 style="font-family:Lucida Handwriting">Exam Hall & Seat Arrangement System </h1>
+      <p style="font-family:Serif">Exam Hall & Seat Arrangement System represents a transformative solution designed to optimize the organization of examinations in educational institutions. It stands for providing institutions with a robust, user-friendly, and technologically advanced platform to ensure the integrity and efficiency of the examination process. 
+        This not only saves valuable time and effort for administrators but also enhances the overall examination experience for students by creating an organized and efficient environment.</p>
+    </div>     
+    </div>
+    <script type="text/javascript">
+        const toggleMenu = () => document.body.classList.toggle("open");
+      </script>
+</body>
+</html>

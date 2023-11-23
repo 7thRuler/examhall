@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ALLOCATION</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="/static/home.css">
+	<link rel="stylesheet" type="text/css" href="/static/alloc.css">
+</head>
+<body>
+	<div class="topnav">
+    <div class="lo">
+      <img src="/static/images/logo.png" alt="Logo" class="im">
+        <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+    </div>
+    <div class="overlay"></div>
+    <button class="burger" onclick="toggleMenu()">
+    <i class="fa-solid fa-bars"></i>
+    <i class="fa-solid fa-close"></i>
+    </button>
+    <aside>
+      <a href="/admin">Seat Arrangenment</a>
+      <a class="active">Allocate Students</a>
+      <a href="/dash">Dashboard</a>
+      <a href="/attend">Atttendence</a>
+      <a href="/">Logout</a>
+      <button>#</button>
+    </aside>
+  </div>
+<br><br><br><br>
+  <div class="form-container">
+  <h1>Arrange Students</h1>
+  
+  <form method="post" id="allocationForm" action="{{ url_for('alloc') }}">
+      <label for="class_no">Class No:</label>
+      <select id="class_no" name="class_no" required>
+              <!-- Include options for class numbers -->
+              {% for no in class_no %}
+                <option value="{{ no }}">{{ no }}</option>
+              {% endfor %}
+              <!-- Add more options as needed -->
+      </select><br><br>
+
+      <label for="num_departments">Number of Departments:</label>
+      <input type="number" id="num_departments" name="num_departments" required><br>
+
+      <div id="fieldsContainer"></div>
+      <div id="displayContainer"></div>
+      </form>
+  <button onclick="generateFields()">Generate Fields</button>
+
+      <!-- Display the arrangement table if it exists -->
+  </div>
+  
+    
+    
+
+
+  <script type="text/javascript">
+    function generateFields() {
+      var num_departments = document.getElementById('num_departments').value;
+      var container = document.getElementById('fieldsContainer');
+      container.innerHTML = '';
+
+      for (var i = 1; i <= num_departments; i++) {
+        var labelStart = document.createElement('label');
+        labelStart.innerHTML = 'Starting Roll Number (Department ' + i + '):';
+        container.appendChild(labelStart);
+
+        var inputStart = document.createElement('input');
+        inputStart.type = 'number';
+        inputStart.name = 'start_roll_' + i;
+        container.appendChild(inputStart);
+
+        var labelEnd = document.createElement('label');
+        labelEnd.innerHTML = 'Ending Roll Number (Department ' + i + '):';
+        container.appendChild(labelEnd);
+
+        var inputEnd = document.createElement('input');
+        inputEnd.type = 'number';
+        inputEnd.name = 'end_roll_' + i;
+        container.appendChild(inputEnd);
+      }
+
+      // Add a submit button to the form
+      var submitButton = document.createElement('button');
+      submitButton.innerHTML = 'Submit';
+      submitButton.type = 'button';
+      submitButton.onclick = function() {
+        displayValues();
+      };
+      container.appendChild(submitButton);
+    }
+    function displayValues() {
+      var num_departments = document.getElementById('num_departments').value;
+      var displayContainer = document.getElementById('displayContainer');
+      displayContainer.innerHTML = '';
+
+      for (var i = 1; i <= num_departments; i++) {
+        var startRoll = document.getElementsByName('start_roll_' + i)[0].value;
+        var endRoll = document.getElementsByName('end_roll_' + i)[0].value;
+            
+        // Display the entered values 
+        var table = document.createElement('table');
+        var headerRow = table.insertRow(0);
+        var headerCell = headerRow.insertCell(0);
+        headerCell.innerHTML = 'Department ' + i + ' Roll Numbers';
+
+        // Display the entered values in a table format
+        var row = table.insertRow(1);
+        var cell = row.insertCell(0);
+        cell.innerHTML = 'Roll Numbers: ';
+
+        for (var roll = startRoll; roll <= endRoll; roll++) {
+          cell.innerHTML += roll + ', ';
+        }
+
+            // Remove the trailing comma and space
+        cell.innerHTML = cell.innerHTML.slice(0, -2);
+        displayContainer.appendChild(table);
+      }
+    }
+    const toggleMenu = () => document.body.classList.toggle("open");
+  </script>
+</body>
+</html>

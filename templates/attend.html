@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ATTENDENCE</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+	<link rel="stylesheet" type="text/css" href="/static/home.css">
+</head>
+<body>
+	<div class="topnav">
+        <div class="lo">
+            <img src="/static/images/logo.png" alt="Logo" class="im">
+            <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+        </div>
+          <div class="overlay"></div>
+          <button class="burger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-close"></i>
+          </button>
+          <aside>
+            <a href="/admin">Seat Arrangenment</a>
+            <a href="/alloc">Allocate Students</a>
+            <a href="/dash">Dashboard</a>
+            <a class="active">Atttendence</a>
+
+            <a href="/">Logout</a>
+            <button>#</button>
+          </aside>
+    </div>
+
+    <script type="text/javascript">
+        const toggleMenu = () => document.body.classList.toggle("open");
+    </script>
+</body>
+</html>
