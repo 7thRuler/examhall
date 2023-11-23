@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ALLOCATION</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ALLOCATION</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"/>
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/static/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/home.css">
-	<link rel="stylesheet" type="text/css" href="/static/alloc.css">
+  <link rel="stylesheet" type="text/css" href="/static/alloc.css">
 </head>
+
 <body>
-	<div class="topnav">
+  <div class="topnav">
     <div class="lo">
       <img src="/static/images/logo.png" alt="Logo" class="im">
-        <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
+      <h1 style="font-family:Serif" class="scms">SCMS School Of Engineering And Technology</h1>
     </div>
     <div class="overlay"></div>
     <button class="burger" onclick="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-    <i class="fa-solid fa-close"></i>
+      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-close"></i>
     </button>
     <aside>
       <a href="/admin">Seat Arrangenment</a>
@@ -37,58 +39,70 @@
       <button>#</button>
     </aside>
   </div>
-<br><br><br><br>
+  <br><br><br><br>
   <div class="form-container">
-  <h1>Arrange Students</h1>
-  
-  <form method="post" id="allocationForm" action="{{ url_for('alloc') }}">
+    <h1 style="color: #1f1d58;">Arrange Students</h1>
+
+    <form method="post" id="allocationForm" action="{{ url_for('alloc') }}">
       <label for="class_no">Class No:</label>
       <select id="class_no" name="class_no" required>
-              <!-- Include options for class numbers -->
-              {% for no in values %}
-                <option value="{{ no }}">{{ no }}</option>
-              {% endfor %}
-              <!-- Add more options as needed -->
+        <!-- Include options for class numbers -->
+        {% for no in values %}
+        <option value="{{ no }}">{{ no }}</option>
+        {% endfor %}
+        <!-- Add more options as needed -->
       </select><br><br>
 
-      <label for="num_departments">Number of Departments:</label>
-      <input type="number" id="num_departments" name="num_departments" required><br>
+      <label for="departments">Departments</label>
+      <select multiple="multiple" id="departments" size="2">
+        <!-- here comes the options  -->
+        {% for deps in departments %}
+        <option value="{{ deps }}">{{ deps }}</option>
+        {% endfor %}
+      </select>
 
       <div id="fieldsContainer"></div>
       <div id="displayContainer"></div>
-      </form>
-  <button onclick="generateFields()">Generate Fields</button>
+    </form>
+    <button id="generateFields" onclick="generateFields()">Generate Fields</button>
 
-      <!-- Display the arrangement table if it exists -->
+    <!-- Display the arrangement table if it exists -->
   </div>
-  
-    
-    
+
+
+
 
 
   <script type="text/javascript">
     function generateFields() {
-      var num_departments = document.getElementById('num_departments').value;
+      document.getElementById("generateFields").style = "display:none;"
+      const class_num = window.class_no.value
+      const departments = []
+      for (let id = 0; id < window.departments.length; id++) {
+        if (window.departments.options[id].selected)
+          departments.push(window.departments.options[id].value)
+      }
+
       var container = document.getElementById('fieldsContainer');
       container.innerHTML = '';
 
-      for (var i = 1; i <= num_departments; i++) {
+      for (var i = 0; i < departments.length; i++) {
         var labelStart = document.createElement('label');
-        labelStart.innerHTML = 'Starting Roll Number (Department ' + i + '):';
+        labelStart.innerHTML = 'Starting Roll Number (Department ' + departments[i] + '):';
         container.appendChild(labelStart);
 
         var inputStart = document.createElement('input');
         inputStart.type = 'number';
-        inputStart.name = 'start_roll_' + i;
+        inputStart.id = `start_num_${departments[i]}`
         container.appendChild(inputStart);
 
         var labelEnd = document.createElement('label');
-        labelEnd.innerHTML = 'Ending Roll Number (Department ' + i + '):';
+        labelEnd.innerHTML = 'Ending Roll Number (Department ' + departments[i] + '):';
         container.appendChild(labelEnd);
 
         var inputEnd = document.createElement('input');
         inputEnd.type = 'number';
-        inputEnd.name = 'end_roll_' + i;
+        inputEnd.id = `end_num_${departments[i]}`
         container.appendChild(inputEnd);
       }
 
@@ -96,41 +110,99 @@
       var submitButton = document.createElement('button');
       submitButton.innerHTML = 'Submit';
       submitButton.type = 'button';
-      submitButton.onclick = function() {
+      submitButton.id = "submitButton_"
+      submitButton.onclick = function () {
         displayValues();
       };
       container.appendChild(submitButton);
     }
     function displayValues() {
-      var num_departments = document.getElementById('num_departments').value;
-      var displayContainer = document.getElementById('displayContainer');
-      displayContainer.innerHTML = '';
 
-      for (var i = 1; i <= num_departments; i++) {
-        var startRoll = document.getElementsByName('start_roll_' + i)[0].value;
-        var endRoll = document.getElementsByName('end_roll_' + i)[0].value;
-            
-        // Display the entered values 
-        var table = document.createElement('table');
-        var headerRow = table.insertRow(0);
-        var headerCell = headerRow.insertCell(0);
-        headerCell.innerHTML = 'Department ' + i + ' Roll Numbers';
-
-        // Display the entered values in a table format
-        var row = table.insertRow(1);
-        var cell = row.insertCell(0);
-        cell.innerHTML = 'Roll Numbers: ';
-
-        for (var roll = startRoll; roll <= endRoll; roll++) {
-          cell.innerHTML += roll + ', ';
+      const class_num = window.class_no.value
+      const departments = {}
+      for (let id = 0; id < window.departments.length; id++) {
+        if (window.departments.options[id].selected)
+          departments[window.departments.options[id].value] = 0
+      }
+      for (const val in departments) {
+        departments[val] = [document.getElementById(`start_num_${val}`).value, document.getElementById(`end_num_${val}`).value]
+      }
+      fetch("/alloc", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          class_num: class_num,
+          departments: departments
+        }),
+      }).then(res => res.json().then((val) => {
+        let iterator = 0
+        let student_iterator = 0;
+        const data = []
+        const attendance = []
+        const departments = []
+        attendance.push(["SL NO", "ROLL NO", "CLASS", "SEM", "NAME", "SIGNATURE"])
+        for (let id = 0; id < window.departments.length; id++) {
+          if (window.departments.options[id].selected)
+            departments.push(window.departments.options[id].value)
+        }
+        for (let row = 0; row < val.rows; row++) {
+          const entry = []
+          for (let col = 0; col < val.cols; col++) {
+            const dep = departments[iterator % departments.length]
+            entry.push(`Sem : ${val.students[dep][student_iterator].sem}\nClass Name : ${val.students[dep][student_iterator].class_name}\nRoll No : ${val.students[dep][student_iterator].roll_no}\nName : ${val.students[dep][student_iterator].name}`)
+            attendance.push([iterator + 1, val.students[dep][student_iterator].roll_no, val.students[dep][student_iterator].class_name, val.students[dep][student_iterator].sem, val.students[dep][student_iterator].name, "     "])
+            iterator++;
+            if (!(iterator % departments.length)) {
+              student_iterator++;
+            }
+          }
+          data.push(entry)
         }
 
-            // Remove the trailing comma and space
-        cell.innerHTML = cell.innerHTML.slice(0, -2);
-        displayContainer.appendChild(table);
-      }
+        function s2ab(s) {
+          var buf = new ArrayBuffer(s.length);
+          var view = new Uint8Array(buf);
+          for (var i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+          return buf;
+        }
+
+        // disable submit button
+        document.getElementById("submitButton_").style = "display:none;"
+
+        var workbook = XLSX.utils.book_new();
+        var worksheet = XLSX.utils.aoa_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'STUDENT_PLACEMENT');
+        var binaryString = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+        var blob1 = new Blob([s2ab(binaryString)], { type: 'application/octet-stream' });
+
+        var link1 = document.createElement('a');
+        link1.href = URL.createObjectURL(blob1);
+        link1.download = 'seat arrangement.xlsx';
+        link1.target = '_blank';
+        link1.innerText = "Download Seat Arrangement"
+
+        var workbook2 = XLSX.utils.book_new();
+        var worksheet2 = XLSX.utils.aoa_to_sheet(attendance);
+        XLSX.utils.book_append_sheet(workbook2, worksheet2, 'ATTENDENCE_SHEET');
+        var binaryString2 = XLSX.write(workbook2, { bookType: 'xlsx', type: 'binary' });
+        var blob2 = new Blob([s2ab(binaryString2)], { type: 'application/octet-stream' });
+
+        var link2 = document.createElement('a');
+        link2.href = URL.createObjectURL(blob2);
+        link2.download = 'attendence sheet.xlsx';
+        link2.target = '_blank';
+        link2.innerText = "Download Attendece Sheet"
+        window.fieldsContainer.appendChild(link1)
+        window.fieldsContainer.appendChild(document.createElement('br'))
+        window.fieldsContainer.appendChild(link2)
+      }))
+
+
     }
     const toggleMenu = () => document.body.classList.toggle("open");
   </script>
 </body>
+
 </html>
