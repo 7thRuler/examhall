@@ -77,33 +77,19 @@ def insert():
     return render_template('admin.html')
     
 @app.route("/alloc",methods=['GET','POST'])
-def dropdown():
-    conn = sqlite3.connect('room_details.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT class_no FROM rooms")
-    data = cursor.fetchall()
-    conn.close()
-    return data
-
 def alloc():
     if request.method== 'POST':
-        # class_no = int(request.form['class_no'])
+        class_no = int(request.form['class_no'])
         num_departments = int(request.form['num_departments'])
+        start_roll = [int(request.form[f'start_roll_{i + 1}']) for i in range(num_departments)]
+        end_roll = [int(request.form[f'end_roll_{i + 1}']) for i in range(num_departments)]
+        
+        
+        
+        
         # Create lists to store starting and ending roll numbers for each department
         start_roll_numbers = []
-        end_roll_numbers = []   
-        
-        # conn = sqlite3.connect('room_details.db')
-        # cursor = conn.cursor() 
-           
-        # cursor.execute("SELECT DISTINCT class_no FROM rooms")
-        # room_no=[row[0] for row in cursor.fetchone()]
-       
-        # cursor.close()
-        # conn.close()
-        
-        
-        
+        end_roll_numbers = []  
         # Retrieve starting and ending roll numbers for each department
         for i in range(1, num_departments + 1):
             start_roll_key = 'start_roll_' + str(i)
@@ -118,15 +104,21 @@ def alloc():
         # Example matrix logic (replace with your actual logic)
         
         # return render_template('alloc.html', arrangement_table=arrangement_table)
-        
-    
-        
         return render_template('alloc.html')
+        
     else:
-        values=dropdown()
+        raw=dropdown()
+        values=[str(item[0]) for item in raw]
         return render_template('alloc.html', values=values)
 
 # Matrix Logic (matrix.py)
+def dropdown():
+    conn = sqlite3.connect('room_details.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT class_no FROM rooms")
+    data = cursor.fetchall()
+    conn.close()
+    return data
 
 @app.route("/register",methods=['GET','POST'])
 def register():

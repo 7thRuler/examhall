@@ -45,7 +45,7 @@
       <label for="class_no">Class No:</label>
       <select id="class_no" name="class_no" required>
               <!-- Include options for class numbers -->
-              {% for no in class_no %}
+              {% for no in values %}
                 <option value="{{ no }}">{{ no }}</option>
               {% endfor %}
               <!-- Add more options as needed -->
