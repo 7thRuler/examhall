@@ -156,12 +156,12 @@ def shuffle_sa_no():
     sa_no_values = [row[0] for row in cursor.fetchall()]
 
     # Shuffle the sa_no values
-    w=random.sample(sa_no_values, len(sa_no_values))
-    # random.shuffle(sa_no_values)
-
+    random.shuffle(sa_no_values)
     # Update sa_no values in the database
-    for i, san in  enumerate(w):
-        cursor.execute("UPDATE rooms SET sa_no=? WHERE id=?", (san, i+1))
+    cursor.execute("SELECT id FROM rooms")
+    ids = [row[0] for row in cursor.fetchall()]
+    for i, san in  zip(ids, sa_no_values):
+        cursor.execute("UPDATE rooms SET sa_no=? WHERE id=?", (san, i))
 
     # Commit changes and close the database connection
     conn.commit()
