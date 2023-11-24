@@ -47,8 +47,8 @@
             <form method="post" action="{{ url_for('insert') }}">
                 <h1 class="H1">SEAT ARRANGEMENT</h1>
                 <span>enter details</span>
-                <input type="text" placeholder="Hall no(SA Number)" id="sa_no" name="sa_no"> 
-                <input type="Number" placeholder="Room Number" id="class_no" name="class_no">
+                <input type="text" placeholder="Hall no(SA Number)" id="sa_no" name="sa_no" required> 
+                <input type="Number" placeholder="Room Number" id="class_no" name="class_no"required>
                 <input type="Number" placeholder="Rows" id="rows" name="rows">
                 <input type="Number" placeholder="columns" id="columns" name="columns">
                 <button type="submit">Genarate</button>
