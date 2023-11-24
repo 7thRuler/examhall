@@ -34,7 +34,7 @@
       <a href="/admin">Seat Arrangenment</a>
       <a class="active">Allocate Students</a>
       <a href="/dash">Dashboard</a>
-      <a href="/attend">Atttendence</a>
+      <!---<a href="/attend">Atttendence</a> ---->
       <a href="/">Logout</a>
       <button>#</button>
     </aside>
@@ -151,7 +151,7 @@
           const entry = []
           for (let col = 0; col < val.cols; col++) {
             const dep = departments[iterator % departments.length]
-            entry.push(`Sem : ${val.students[dep][student_iterator].sem}\nClass Name : ${val.students[dep][student_iterator].class_name}\nRoll No : ${val.students[dep][student_iterator].roll_no}\nName : ${val.students[dep][student_iterator].name}`)
+            entry.push(`Sem : ${val.students[dep][student_iterator].sem} \nClass Name : ${val.students[dep][student_iterator].class_name} \nRoll No : ${val.students[dep][student_iterator].roll_no} \nName : ${val.students[dep][student_iterator].name}`)
             attendance.push([iterator + 1, val.students[dep][student_iterator].roll_no, val.students[dep][student_iterator].class_name, val.students[dep][student_iterator].sem, val.students[dep][student_iterator].name, "     "])
             iterator++;
             if (!(iterator % departments.length)) {

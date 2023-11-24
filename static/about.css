@@ -1,0 +1,153 @@
+/* Reset some default styles */
+h1,
+h2,
+p,
+a {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1;
+}
+
+.burger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: none;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+a.active {
+  font-weight: bold;
+}
+
+/* Add styling for the section containing the footer */
+section {
+  margin: 20px;
+}
+
+/* Style the footer */
+footer.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+  padding: 20px;
+}
+
+footer.top img {
+  border-radius: 50%;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 2;
+}
+
+.links-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.links-column h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+a {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.socials-column {
+  flex: 0.5;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.socials a {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* Style the bottom footer */
+footer.bottom {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 0.8rem;
+}
+
+.legal a {
+  margin-left: 10px;
+}
+
+/* Add responsive styling for small screens */
+@media screen and (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 70%;
+    background-color: #333;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    z-index: 2;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  aside.active {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+  }
+}

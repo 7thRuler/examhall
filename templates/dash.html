@@ -77,7 +77,7 @@ tr:nth-child(even) {
             <a href="/admin">Seat Arrangenment</a>
             <a href="/alloc">Allocate Students</a>
             <a class="active">Dashboard</a>
-            <a href="/attend">Atttendence</a>
+            <!---<a href="/attend">Atttendence</a> ---->
             <a href="/">Logout</a>
             <button>#</button>
           </aside>
@@ -105,7 +105,7 @@ tr:nth-child(even) {
                   <td style="text-align: center;" >{{d}}</td>
                   <!--<td style="text-align: center;"><a href="/edit/{{row[0]}}">EDIT</a></td>-->
                   {% endfor %}
-                  <td style="text-align: center;"><a href="/delete/{{row[0]}}">DELETE</a></td>        
+                  <td style="text-align: center;"><a href="/delete/{{row[1]}}">DELETE</a></td>        
               </tr>
             {% endfor %}
       </table>

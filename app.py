@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for, flash, session
+from flask import Flask, redirect, render_template, request, url_for, flash, session, jsonify
 import sqlite3
 import random
 
@@ -25,8 +25,7 @@ def login():
 
 
 @app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    
+def admin():        
         if request.method == 'POST':
         
             
@@ -45,17 +44,29 @@ def admin():
             cursor.close()
             conn.close()
             return render_template('admin.html', room_numbers=room_numbers)
-            
-        
-
-            
 
         return render_template('admin.html')
-   
+
+
+def sa_no_exists(sa_no):
+    # Connect to SQLite database
+    conn = sqlite3.connect('room_details.db')
+    cursor = conn.cursor()
+
+    # Check if sano exists in the database
+    cursor.execute("SELECT EXISTS(SELECT 1 FROM rooms WHERE sa_no=?)", (sa_no,))
+    result = cursor.fetchone()[0]
+
+    cursor.close()
+    conn.close()
+
+    return result == 1   
 @app.route("/insert",methods=['GET','POST'])
-def insert(): 
+def insert():
     if request.method == 'POST':
         sa_no = request.form['sa_no']
+        if sa_no_exists(sa_no):
+            return render_template('admin.html', error='Sano already exists. Choose a different one.')
         class_no=request.form['class_no']
         rows = int(request.form['rows'])
         columns = int(request.form['columns'])
@@ -75,7 +86,12 @@ def insert():
             
 
     return render_template('admin.html')
-    
+def check_sa_no_exists():
+    sa_no = request.args.get('sa_no')
+    result = sa_no_exists(sa_no)
+
+    # Return JSON response
+    return jsonify({'exists': result == 1})
 @app.route("/alloc",methods=['GET','POST'])
 def alloc():
     if request.method== 'POST':
@@ -188,13 +204,13 @@ def shuffle_sa_no():
     conn.commit()
     cursor.close()
     conn.close()
-@app.route('/delete/<id>')
-def delete(id):
+@app.route('/delete/<sa_no>')
+def delete(sa_no):
 	conn = sqlite3.connect("room_details.db")
 	with conn:
 		cursor = conn.cursor()
-		cursor.execute("DELETE FROM rooms WHERE class_no=?",[id])
-	return  redirect(url_for('home'))
+		cursor.execute("DELETE FROM rooms WHERE class_no=?",[sa_no])
+	return redirect(url_for('dash'))
 
 
 if __name__ == '__main__':

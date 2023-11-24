@@ -34,7 +34,7 @@
             <a class="active">Seat Arrangenment</a>
             <a href="/alloc">Allocate Students</a>
             <a href="/dash">Dashboard</a>
-            <a href="/attend">Atttendence</a>
+            <!---<a href="/attend">Atttendence</a> ---->
 
             <a href="/">Logout</a>
             <button>#</button>
@@ -43,6 +43,7 @@
 <br><br><br><br>
     <div class="container" id="container">
         <div class="form-container sign-up">
+            <div class="overlay" id="overlay" onclick="closePopup()"></div>
             <form method="post" action="{{ url_for('insert') }}">
                 <h1 class="H1">SEAT ARRANGEMENT</h1>
                 <span>enter details</span>
@@ -94,6 +95,20 @@
       {% endif %}
   </div>
     <script type="text/javascript">
+        function checkSanoExists() {
+            var sa_no = document.getElementById('sa_no').value;
+    
+            // Make an AJAX request to the server
+            fetch(`/check_sa_no_exists?sa_no=${sa_no}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        // Show alert if sano already exists
+                        alert('SA No already exists in the database!');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
         const toggleMenu = () => document.body.classList.toggle("open");
     </script>
 </body>
